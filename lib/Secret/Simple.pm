@@ -9,7 +9,7 @@ use Crypt::CBC;
 use Exporter;
 use MIME::Base64;
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 @ISA    = qw( Exporter );
 @EXPORT = qw( ssdecrypt ssdecryptraw ssencrypt ssencryptraw );
@@ -184,7 +184,8 @@ sub _read_rawfile {
     croak "Bad limit passed" if $limit && $limit !~ /^\d+$/;
     my ($chunk, $num, $data, $buf) = ( 8192, 0, "" );
     croak "Unable to read from file" unless
-      open my ($F), "< :raw", $fn;
+      open my ($F), $fn;
+    binmode($F);
     until ( eof($F) ) {
         $chunk = $limit - $num if $limit && $num + $chunk > $limit;
         $num += read($F, $buf, $chunk);
@@ -204,7 +205,7 @@ Secret::Simple - Secure secrets in configurations and code
 
 =head1 VERSION
 
-This document describes Secret::Simple version 0.10
+This document describes Secret::Simple version 0.11
 
 =head1 SYNOPSIS
 

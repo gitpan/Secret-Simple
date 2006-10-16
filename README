@@ -1,4 +1,4 @@
-Secret::Simple version 0.10
+Secret::Simple version 0.11
 
 This module implements a straightforward interface for encrypting and
 decrypting secret information like user IDs and passwords. Use is

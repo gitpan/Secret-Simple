@@ -9,7 +9,7 @@ use MIME::Base64;
 use lib '../lib';
 use Secret::Simple;
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 my %opt;
 
@@ -178,7 +178,8 @@ sub write_rawfile {
     my ($fn, $data) = @_;
     return unless $data;
     bomb("Unable to write to file.")
-      unless open my ($F), "> :raw", $fn;
+      unless open my ($F), ">$fn";
+    binmode($F);
     print $F $data;
     close $F;
     return 1;
@@ -238,7 +239,7 @@ sstool - Secret::Simple sstool command line tool
 
 =head1 VERSION
 
-This document describes Secret::Simple sstool version 0.10
+This document describes Secret::Simple sstool version 0.11
 
 =head1 SYNOPSIS
 
